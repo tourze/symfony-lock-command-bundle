@@ -5,5 +5,7 @@ services:
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
     public: false
 
+  Tourze\LockCommandBundle\Command\:
+    resource: '../../Command/'
   Tourze\LockCommandBundle\EventSubscriber\:
     resource: '../../EventSubscriber/'
