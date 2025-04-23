@@ -13,8 +13,8 @@
     "symfony/event-dispatcher": "^6.4",
     "symfony/lock": "^6.4",
     "symfony/framework-bundle": "^6.4",
-    "symfony/service-contracts": "^3",
-    "symfony/yaml": "^6.4 || ^7.0",
+    "symfony/service-contracts": "^3.5",
+    "symfony/yaml": "^6.4 || ^7.1",
     "yiisoft/json": "^1.0"
   },
   "require-dev": {
