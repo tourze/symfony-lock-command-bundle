@@ -5,12 +5,14 @@ namespace Tourze\LockCommandBundle\EventSubscriber;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\LockInterface;
 use Symfony\Contracts\Service\ResetInterface;
 use Tourze\LockCommandBundle\Command\LockableCommand;
 
+#[AutoconfigureTag('as-coroutine')]
 class LockCommandEventSubscriber implements EventSubscriberInterface, ResetInterface
 {
     public static function getSubscribedEvents(): array
