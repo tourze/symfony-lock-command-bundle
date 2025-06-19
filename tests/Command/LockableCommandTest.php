@@ -4,14 +4,24 @@ namespace Tourze\LockCommandBundle\Tests\Command;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use Tourze\LockCommandBundle\Command\LockableCommand;
 
 class LockableCommandTest extends TestCase
 {
     public function testGetLockKeyFormat(): void
     {
-        $command = new #[AsCommand(name: 'test:command')] class extends LockableCommand {
+        /** @phpstan-ignore-next-line */
+        $command = new #[AsCommand(name: 'test:command', description: 'Test command')] class extends LockableCommand {
+            public const NAME = 'test:command';
+            
+            protected function execute(InputInterface $input, OutputInterface $output): int
+            {
+                return Command::SUCCESS;
+            }
         };
 
         $input = new ArrayInput([
@@ -23,8 +33,6 @@ class LockableCommandTest extends TestCase
 
         // 确保生成了锁的键
         $this->assertNotNull($lockKey);
-        $this->assertIsString($lockKey);
-
         // 确保类名在键中
         $commandClass = str_replace('\\', '_', get_class($command));
         $this->assertStringContainsString($commandClass, $lockKey);
@@ -35,7 +43,14 @@ class LockableCommandTest extends TestCase
 
     public function testGetLockKeyConsistency(): void
     {
-        $command = new #[AsCommand(name: 'test:command')] class extends LockableCommand {
+        /** @phpstan-ignore-next-line */
+        $command = new #[AsCommand(name: 'test:command', description: 'Test command')] class extends LockableCommand {
+            public const NAME = 'test:command';
+            
+            protected function execute(InputInterface $input, OutputInterface $output): int
+            {
+                return Command::SUCCESS;
+            }
         };
 
         // 用相同参数多次调用，应得到相同的键

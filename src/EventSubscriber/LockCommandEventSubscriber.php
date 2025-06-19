@@ -44,7 +44,7 @@ class LockCommandEventSubscriber implements EventSubscriberInterface, ResetInter
         }
 
         $key = $command->getLockKey($event->getInput());
-        if (!$key) {
+        if ($key === null || $key === '') {
             return;
         }
         $lock = $this->lockFactory->createLock($key, 60 * 60);
@@ -66,7 +66,7 @@ class LockCommandEventSubscriber implements EventSubscriberInterface, ResetInter
 
     public function onConsoleTerminate(): void
     {
-        if (!$this->lock) {
+        if ($this->lock === null) {
             return;
         }
 
