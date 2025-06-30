@@ -12,7 +12,7 @@ use Symfony\Component\Lock\LockInterface;
 use Symfony\Contracts\Service\ResetInterface;
 use Tourze\LockCommandBundle\Command\LockableCommand;
 
-#[AutoconfigureTag('as-coroutine')]
+#[AutoconfigureTag(name: 'as-coroutine')]
 class LockCommandEventSubscriber implements EventSubscriberInterface, ResetInterface
 {
     public static function getSubscribedEvents(): array
