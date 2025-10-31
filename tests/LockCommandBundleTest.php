@@ -1,16 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tourze\LockCommandBundle\Tests;
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tourze\LockCommandBundle\LockCommandBundle;
+use Tourze\PHPUnitSymfonyKernelTest\AbstractBundleTestCase;
 
-class LockCommandBundleTest extends TestCase
+/**
+ * @internal
+ */
+#[CoversClass(LockCommandBundle::class)]
+#[RunTestsInSeparateProcesses]
+final class LockCommandBundleTest extends AbstractBundleTestCase
 {
-    public function testBundleInstance(): void
-    {
-        $bundle = new LockCommandBundle();
-
-        $this->assertInstanceOf(LockCommandBundle::class, $bundle);
-    }
 }

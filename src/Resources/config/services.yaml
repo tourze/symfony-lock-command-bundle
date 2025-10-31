@@ -5,7 +5,20 @@ services:
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
     public: false
 
+  # Configure Lock Factory service
+  Symfony\Component\Lock\LockFactory:
+    arguments:
+      - '@Symfony\Component\Lock\Store\InMemoryStore'
+
+  Symfony\Component\Lock\Store\InMemoryStore: ~
+
   Tourze\LockCommandBundle\Command\:
     resource: '../../Command/'
+
   Tourze\LockCommandBundle\EventSubscriber\:
     resource: '../../EventSubscriber/'
+
+  # 测试环境下需要的测试用命令
+  Tourze\LockCommandBundle\Tests\Fixtures\Command\DummyLockableCommand:
+    public: true
+    tags: ['console.command']

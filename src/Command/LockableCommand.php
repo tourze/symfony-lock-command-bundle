@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tourze\LockCommandBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
@@ -20,6 +22,6 @@ abstract class LockableCommand extends Command
         $params = Json::encode($params);
         $params = md5($params);
 
-        return str_replace('\\', '_', static::class) . '_' . $params;
+        return str_replace('\\', '_', $this::class) . '_' . $params;
     }
 }
