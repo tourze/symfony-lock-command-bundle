@@ -17,8 +17,3 @@ services:
 
   Tourze\LockCommandBundle\EventSubscriber\:
     resource: '../../EventSubscriber/'
-
-  # 测试环境下需要的测试用命令
-  Tourze\LockCommandBundle\Tests\Fixtures\Command\DummyLockableCommand:
-    public: true
-    tags: ['console.command']
