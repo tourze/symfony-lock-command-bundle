@@ -1,19 +1,10 @@
 services:
-  # default configuration for services in *this* file
   _defaults:
-    autowire: true      # Automatically injects dependencies in your services.
-    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    autowire: true
+    autoconfigure: true
     public: false
-
-  # Configure Lock Factory service
-  Symfony\Component\Lock\LockFactory:
-    arguments:
-      - '@Symfony\Component\Lock\Store\InMemoryStore'
-
-  Symfony\Component\Lock\Store\InMemoryStore: ~
 
   Tourze\LockCommandBundle\Command\:
     resource: '../../Command/'
-
   Tourze\LockCommandBundle\EventSubscriber\:
     resource: '../../EventSubscriber/'

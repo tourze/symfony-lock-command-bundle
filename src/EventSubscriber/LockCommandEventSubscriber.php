@@ -19,7 +19,7 @@ use Tourze\LockCommandBundle\Interface\LockHistoryLoggerInterface;
 
 #[AutoconfigureTag(name: 'as-coroutine')]
 #[WithMonologChannel(channel: 'lock_command')]
-class LockCommandEventSubscriber implements EventSubscriberInterface, ResetInterface
+final class LockCommandEventSubscriber implements EventSubscriberInterface, ResetInterface
 {
     public static function getSubscribedEvents(): array
     {

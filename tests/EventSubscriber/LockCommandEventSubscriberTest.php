@@ -16,6 +16,7 @@ use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\SharedLockInterface;
 use Tourze\LockCommandBundle\EventSubscriber\LockCommandEventSubscriber;
 use Tourze\LockCommandBundle\Tests\Fixtures\Command\DummyLockableCommand;
+use Tourze\LockCommandBundle\Tests\Fixtures\Command\EmptyLockKeyCommand;
 use Tourze\PHPUnitSymfonyKernelTest\AbstractEventSubscriberTestCase;
 
 /**
@@ -35,8 +36,7 @@ final class LockCommandEventSubscriberTest extends AbstractEventSubscriberTestCa
         $this->lockFactory = $this->createMock(LockFactory::class);
 
         // 替换容器中的 LockFactory 服务为模拟对象
-        /** @phpstan-ignore-next-line */
-        $this->getContainer()->set(LockFactory::class, $this->lockFactory);
+        self::getContainer()->set(LockFactory::class, $this->lockFactory);
 
         $this->subscriber = self::getService(LockCommandEventSubscriber::class);
     }
@@ -154,14 +154,8 @@ final class LockCommandEventSubscriberTest extends AbstractEventSubscriberTestCa
 
     public function testOnConsoleCommandWithEmptyLockKey(): void
     {
-        // Mock DummyLockableCommand 是为了测试空锁键情况。
-        // 使用具体类是因为需要 Mock getLockKey 方法返回空值，
-        // 而 LockableCommand 是抽象类。这比创建新的测试类更简洁。
-        $command = $this->createMock(DummyLockableCommand::class);
-        $command->expects($this->once())
-            ->method('getLockKey')
-            ->willReturn('') // 空锁键
-        ;
+        // 使用专门的命令类来测试空锁键场景
+        $command = self::getService(EmptyLockKeyCommand::class);
 
         $input = new ArrayInput([]);
         $output = new NullOutput();

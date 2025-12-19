@@ -4,7 +4,7 @@ namespace Tourze\LockCommandBundle\DependencyInjection;
 
 use Tourze\SymfonyDependencyServiceLoader\AutoExtension;
 
-class LockCommandExtension extends AutoExtension
+final class LockCommandExtension extends AutoExtension
 {
     protected function getConfigDir(): string
     {

@@ -15,7 +15,7 @@ use Tourze\LockCommandBundle\Command\LockableCommand;
  * 用于测试的具体 LockableCommand 实现
  */
 #[AsCommand(name: self::NAME, description: 'Test lockable command')]
-class DummyLockableCommand extends LockableCommand
+final class DummyLockableCommand extends LockableCommand
 {
     public const NAME = 'test:lockable';
 

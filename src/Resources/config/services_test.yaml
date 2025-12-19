@@ -7,3 +7,7 @@ services:
   Tourze\LockCommandBundle\Tests\Fixtures\Command\DummyLockableCommand:
     public: true
     tags: ['console.command']
+
+  Tourze\LockCommandBundle\Tests\Fixtures\Command\EmptyLockKeyCommand:
+    public: true
+    tags: ['console.command']
